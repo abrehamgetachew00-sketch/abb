@@ -1,6 +1,0 @@
-{
-  "_id": "ObjectId",
-  "username": "string",
-  "role": "seller | buyer | admin",
-  "balance": "number (withdrawable earnings)"
-}
