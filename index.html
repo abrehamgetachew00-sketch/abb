@@ -3,446 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Digital Assets & Service Hub</title>
+    <title>NextGen Multi-Vendor Marketplace</title>
     <style>
-        /* Modern Dark Theme Design */
         :root {
-            --bg-dark: #0f0f12;
-            --bg-card: #16161e;
+            --bg-main: #0b0b0e;
+            --bg-card: #121218;
             --accent-gold: #ffb703;
-            --text-main: #f8f9fa;
-            --text-muted: #a4a6b5;
-            --border-glow: #242433;
+            --accent-blue: #24a1de;
+            --text-light: #f8f9fa;
+            --text-dim: #a4a6b5;
+            --border: #1e1e2a;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-light); padding: 40px 5%; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 60px;
-        }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+        .logo { font-size: 1.6rem; font-weight: 800; }
+        .logo span { color: var(--accent-gold); }
 
-        /* Header / Navigation */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border-glow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        .dashboard-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .panel { background: var(--bg-card); border: 1px solid var(--border); padding: 25px; border-radius: 12px; }
+        
+        .val-display { font-size: 2.2rem; font-weight: 800; color: var(--accent-gold); margin: 15px 0; }
+        .grid-item { background: var(--bg-main); border: 1px solid var(--border); padding: 20px; border-radius: 8px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.2s; }
+        .grid-item:hover { border-color: var(--accent-gold); }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-main);
-        }
-
-        .logo span {
-            color: var(--accent-gold);
-        }
-
-        .telegram-btn {
-            background-color: #24a1de;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: transform 0.2s ease;
-        }
-
-        .telegram-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-dark) 100%);
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            font-weight: 800;
-        }
-
-        .hero h1 span {
-            color: var(--accent-gold);
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            font-size: 1.1rem;
-        }
-
-        /* Filter Controls */
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        .filter-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glow);
-            color: var(--text-main);
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--accent-gold);
-            color: var(--bg-dark);
-            border-color: var(--accent-gold);
-        }
-
-        /* Grid Framework */
-        .marketplace-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        /* Card Layout */
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-gold);
-        }
-
-        .card-preview {
-            width: 100%;
-            height: 200px;
-            background-color: #242433;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-weight: bold;
-            position: relative;
-        }
-
-        .card-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(15, 15, 18, 0.85);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            color: var(--accent-gold);
-            font-weight: bold;
-            border: 1px solid var(--accent-gold);
-        }
-
-        .card-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .card-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-glow);
-        }
-
-        .price {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--accent-gold);
-        }
-
-        .order-btn {
-            background-color: var(--text-main);
-            color: var(--bg-dark);
-            border: none;
-            padding: 8px 18px;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-        }
-
-        .order-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* Order Overlay Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-glow);
-            max-width: 500px;
-            width: 100%;
-            border-radius: 16px;
-            padding: 30px;
-            position: relative;
-            text-align: center;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-        }
-
-        .modal h2 {
-            margin-bottom: 15px;
-            font-weight: 800;
-        }
-
-        .modal p {
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-        }
-
-        .payment-methods {
-            background: var(--bg-dark);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            text-align: left;
-            border: 1px solid var(--border-glow);
-        }
-
-        .payment-methods h4 {
-            color: var(--accent-gold);
-            margin-bottom: 8px;
-        }
-
-        .confirm-btn {
-            display: block;
-            width: 100%;
-            background-color: #24a1de;
-            color: white;
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        /* Responsive Configuration */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .filters { flex-wrap: wrap; }
-        }
+        button { background: var(--text-light); color: var(--bg-main); border: none; padding: 10px 20px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+        button:hover { opacity: 0.9; }
+        .buy-action { background: var(--accent-gold); color: var(--bg-main); }
     </style>
 </head>
 <body>
 
-    <!-- Header Navbar -->
     <header>
-        <div class="logo">NEXT<span>GEN</span></div>
-        <!-- REPLACE THE USERNAME BELOW WITH YOUR PUBLIC TELEGRAM LINK OR BOT -->
-        <a href="https://t.me/ModApk1028" target="_blank" class="telegram-btn">Join Telegram Channel</a>
+        <div class="logo">NEXT<span>GEN</span> MARKETPLACE</div>
+        <div style="color: var(--text-dim);">Live API Server State Core</div>
     </header>
 
-    <!-- Main Introduction -->
-    <section class="hero">
-        <h1>Premium <span>Digital Services</span> & Assets</h1>
-        <p>Explore elite UI code components, professional brand identity assets, and custom logic systems tailored for digital businesses.</p>
-        
-        <!-- Interactive Category Filters -->
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterCategory('all')">All Assets</button>
-            <button class="filter-btn" onclick="filterCategory('design')">Graphics & Brand</button>
-            <button class="filter-btn" onclick="filterCategory('code')">Web Component / Code</button>
+    <div class="dashboard-layout">
+        <!-- Client UI View -->
+        <div class="panel">
+            <h2>Buyer Account (Alex)</h2>
+            <p style="color: var(--text-dim); margin-top: 5px;">Your Purchasing Credits:</p>
+            <div class="val-display" id="buyer-balance">$0.00</div>
+            <h3 style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);">Active Marketplace Gigs</h3>
+            <div id="listings-render-target">Connecting to system engine...</div>
         </div>
-    </section>
 
-    <!-- Marketplace Component Grid -->
-    <main class="marketplace-container">
-        <div class="grid" id="product-grid">
-            <!-- Item 1 -->
-            <div class="card" data-category="design">
-                <div class="card-preview">
-                    <!-- You can add images here later inside img src -->
-                    <span>[ Premium Logo Package ]</span>
-                    <div class="card-badge">Graphic Identity</div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Cinematic 3D Brand Logo Layout</h3>
-                    <p class="card-desc">Complete professional brand presentation package. Includes high-resolution source files vector scalable formats, matching transparency profiles, and dark theme variables.</p>
-                    <div class="card-footer">
-                        <span class="price">$25.00</span>
-                        <button class="order-btn" onclick="openOrderModal('Cinematic 3D Brand Logo Layout', '$25.00')">Order Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="card" data-category="code">
-                <div class="card-preview">
-                    <span>[ Real-Time JS Component ]</span>
-                    <div class="card-badge">Interactive Web</div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Real-time Dashboard & Counter Widget</h3>
-                    <p class="card-desc">An interactive JavaScript module optimized for real-time asset tracking or game tickers. Built with structural clean loops, full responsive flex boxes, and smooth custom canvas math charts.</p>
-                    <div class="card-footer">
-                        <span class="price">$45.00</span>
-                        <button class="order-btn" onclick="openOrderModal('Real-time Dashboard & Counter Widget', '$45.00')">Order Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="card" data-category="design">
-                <div class="card-preview">
-                    <span>[ Streamer & Identity Graphics ]</span>
-                    <div class="card-badge">Social Assets</div>
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">Modern Dark Banner & UI Kit Bundle</h3>
-                    <p class="card-desc">High fidelity modern UI asset bundle perfectly optimized for landing splash layouts, professional Telegram channels, and multi-platform advertising banners.</p>
-                    <div class="card-footer">
-                        <span class="price">$20.00</span>
-                        <button class="order-btn" onclick="openOrderModal('Modern Dark Banner & UI Kit Bundle', '$20.00')">Order Now</button>
-                    </div>
-                </div>
-            </div>
+        <!-- Vendor UI View -->
+        <div class="panel">
+            <h2>Seller Dashboard (Yeshi)</h2>
+            <p style="color: var(--text-dim); margin-top: 5px;">Net Earnings Withdrawable (80% Take):</p>
+            <div class="val-display" id="seller-balance" style="color: var(--accent-blue);">$0.00</div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.5;">Funds are routed securely through the automated system escrow routine upon purchase validation.</p>
         </div>
-    </main>
 
-    <!-- Secure Escrow Order Modal -->
-    <div class="modal" id="orderModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeOrderModal()">&times;</span>
-            <h2 id="modalTitle">Confirm Project Order</h2>
-            <p>You are initializing a manual secure project transaction request for: <br><strong id="modalItemName" style="color:var(--accent-gold);"></strong></p>
-            
-            <div class="payment-methods">
-                <h4>Accepted Direct Payout Gateways:</h4>
-                <p>• Telebirr Mobile Transfer (Instant local checkout)</p>
-                <p>• Crypto P2P / Binance Wallet (International clearance)</p>
-            </div>
-
-            <!-- This link handles user redirection to your desk securely -->
-            <a id="telegramDirectLink" href="https://t.me/ModApk1028" target="_blank" class="confirm-btn">Proceed to Secure Telegram Checkout</a>
+        <!-- Corporate Admin Operations Panel -->
+        <div class="panel" style="border-color: var(--accent-blue);">
+            <h2>Platform Operations Room</h2>
+            <p style="color: var(--text-dim); margin-top: 5px;">Total Net Fees Accumulated (20% Cut):</p>
+            <div class="val-display" id="admin-cut-balance" style="color: #10b981;">$0.00</div>
+            <p style="color: var(--text-dim); font-size: 0.9rem;">Processing manual Telebirr settlements and clearance logs.</p>
         </div>
     </div>
 
-    <!-- Active Client Side Interactivity Script -->
     <script>
-        // Filtering Engine
-        function filterCategory(category) {
-            // Update Active Buttons
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        // Adjust this URL to point to your hosted backend engine server later (e.g., Render app link)
+        const BACKEND_SERVER_URL = "http://localhost:3000";
 
-            // Toggle Item Views
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
+        async function refreshMarketplaceInterface() {
+            try {
+                // Fetch and update Buyer balance state
+                const buyerData = await fetch(`${BACKEND_SERVER_URL}/api/user/buyer_01`).then(r => r.json());
+                document.getElementById('buyer-balance').innerText = `$${buyerData.balance.toFixed(2)}`;
 
-        // Operational Modal Engine
-        function openOrderModal(itemName, itemPrice) {
-            document.getElementById('modalItemName').innerText = itemName + " (" + itemPrice + ")";
-            
-            // Auto craft a descriptive custom message to reduce checkout Friction
-            const encodedText = encodeURIComponent("Hello! I want to order the custom asset: " + itemName + " listed for " + itemPrice + ". Please provide account transaction details.");
-            
-            // UPDATE THIS TEMPLATE LINK TO MATCH YOUR PERSONAL SPECIFICATIONS
-            document.getElementById('telegramDirectLink').href = "https://t.me/ModApk1028?text=" + encodedText;
-            
-            document.getElementById('orderModal').style.display = 'flex';
-        }
+                // Fetch and update Seller balance state
+                const sellerData = await fetch(`${BACKEND_SERVER_URL}/api/user/seller_01`).then(r => r.json());
+                document.getElementById('seller-balance').innerText = `$${sellerData.balance.toFixed(2)}`;
 
-        function closeOrderModal() {
-            document.getElementById('orderModal').style.display = 'none';
-        }
+                // Fetch and update Platform fees metric state
+                const adminData = await fetch(`${BACKEND_SERVER_URL}/api/admin/stats`).then(r => r.json());
+                document.getElementById('admin-cut-balance').innerText = `$${adminData.collectedCommissions.toFixed(2)}`;
 
-        // Close when clicking outside content frame
-        window.onclick = function(event) {
-            const modal = document.getElementById('orderModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+                // Fetch and render the structural listings grid cards
+                const listings = await fetch(`${BACKEND_SERVER_URL}/api/listings`).then(r => r.json());
+                let htmlBuffer = "";
+                listings.forEach(gig => {
+                    htmlBuffer += `
+                        <div class="grid-item">
+                            <div>
+                                <strong style="display:block; font-size:1.05rem;">${gig.title}</strong>
+                                <span style="color: var(--accent-gold); font-weight:700;">$${gig.price.toFixed(2)}</span>
+                            </div>
+                            <button class="buy-action" onclick="triggerPurchaseEscrow('${gig.id}')">Buy</button>
+                        </div>
+                    `;
+                });
+                document.getElementById('listings-render-target').innerHTML = htmlBuffer;
+
+            } catch (connectionError) {
+                document.getElementById('listings-render-target').innerHTML = 
+                    `<span style="color:#ef4444;">Server offline. Launch server.js locally or deploy to Render/Railway to ignite the dynamic marketplace connections.</span>`;
             }
         }
+
+        async function triggerPurchaseEscrow(listingId) {
+            try {
+                const response = await fetch(`${BACKEND_SERVER_URL}/api/purchase`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ buyerId: "buyer_01", listingId: listingId })
+                });
+                const networkReceipt = await response.json();
+                
+                if (networkReceipt.error) {
+                    alert("System Intercept: " + networkReceipt.error);
+                } else {
+                    alert("Escrow processing successful! Split transaction recorded: 80% to vendor account, 20% revenue cut held by platform management.");
+                    refreshMarketplaceInterface();
+                }
+            } catch (err) {
+                alert("Network communication timeout trying to access payment pipeline.");
+            }
+        }
+
+        window.onload = refreshMarketplaceInterface;
     </script>
 </body>
 </html>
